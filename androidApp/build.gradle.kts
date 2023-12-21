@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
+    id("kotlin-parcelize")
 }
 
 android {
@@ -40,9 +41,16 @@ android {
 
 dependencies {
     implementation(projects.shared)
+    implementation(libs.coil.compose)
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.material3)
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.navigation.compose)
+
+    implementation(libs.voyager.koin)
+    implementation(libs.voyager.transitions)
+    implementation(libs.voyager.navigator)
+
     debugImplementation(libs.compose.ui.tooling)
 }
