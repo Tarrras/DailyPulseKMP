@@ -40,21 +40,25 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import coil.compose.AsyncImage
 import com.foxdev.dailypulse.android.Details
+import com.foxdev.dailypulse.android.screens.destinations.AboutScreenDestination
 import com.foxdev.dailypulse.articles.Article
 import com.foxdev.dailypulse.articles.ArticlesViewModel
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import org.koin.androidx.compose.getViewModel
 
-object ArticleScreen : Screen {
-    @Composable
-    override fun Content() {
-        val navigator = LocalNavigator.currentOrThrow
-        val viewModel = viewModel<ArticlesViewModel>()
+@Composable
+@Destination(start = true)
+fun ArticlesScreen(
+    navigator: DestinationsNavigator
+) {
+    val viewModel: ArticlesViewModel = getViewModel()
 
-        ArticlesScreenContent(
-            onAboutButtonClick = {
-                navigator push AboutScreen(Details(id = 5, info = "Details"))
-            }, articlesViewModel = viewModel
-        )
-    }
+    ArticlesScreenContent(
+        onAboutButtonClick = {
+            navigator.navigate(AboutScreenDestination(Details(id = 5, info = "Details")))
+        }, articlesViewModel = viewModel
+    )
 }
 
 @Composable
@@ -64,7 +68,7 @@ fun ArticlesScreenContent(
 ) {
     val articlesState by articlesViewModel.articlesState.collectAsState()
 
-    Column {
+    Column(modifier = Modifier.fillMaxSize()) {
         AppBar(onAboutButtonClick)
 
         if (articlesState.loading)

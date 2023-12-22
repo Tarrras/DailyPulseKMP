@@ -20,32 +20,34 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.foxdev.dailypulse.Platform
 import com.foxdev.dailypulse.android.Details
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
-data class AboutScreen(val info: Details) : Screen {
-    @Composable
-    override fun Content() {
-        val navigator = LocalNavigator.currentOrThrow
+@Composable
+@Destination
+fun AboutScreen(
+    info: Details,
+    navigator: DestinationsNavigator
+) {
 
-        Log.d("TAG", "Content: ${info.info}")
+    Log.d("TAG", "Content: ${info.info}")
 
-        AboutScreenContent(
-            onUpButtonClicked = {
-                navigator.pop()
-            }
-        )
-    }
+    AboutScreenContent(
+        onUpButtonClicked = {
+            navigator.popBackStack()
+        }
+    )
 }
 
 @Composable
 fun AboutScreenContent(
     onUpButtonClicked: () -> Unit
 ) {
-    Column {
+    Column(modifier = Modifier.fillMaxSize()) {
         Toolbar(onUpButtonClicked)
         ContentView()
     }

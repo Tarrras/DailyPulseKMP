@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
     id("kotlin-parcelize")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -51,6 +52,13 @@ dependencies {
     implementation(libs.voyager.koin)
     implementation(libs.voyager.transitions)
     implementation(libs.voyager.navigator)
+
+    implementation(libs.raamcosta.compose.destinations.core)
+    implementation(libs.raamcosta.compose.destinations.animation)
+    ksp(libs.raamcosta.compose.destinations.ksp)
+
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
 
     debugImplementation(libs.compose.ui.tooling)
 }
