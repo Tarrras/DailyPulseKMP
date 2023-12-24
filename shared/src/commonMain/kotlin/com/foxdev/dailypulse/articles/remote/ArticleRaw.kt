@@ -1,4 +1,4 @@
-package com.foxdev.dailypulse.articles
+package com.foxdev.dailypulse.articles.remote
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

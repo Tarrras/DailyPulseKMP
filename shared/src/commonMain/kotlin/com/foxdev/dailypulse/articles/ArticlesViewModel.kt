@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.take
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import kotlin.time.Duration.Companion.seconds
@@ -28,11 +29,14 @@ class ArticlesViewModel(
         getArticles()
     }
 
-    private fun getArticles() {
+    fun getArticles(forceFetch: Boolean = false) {
         scope.launch {
-            val fetchedArticles = useCase.getArticles()
+            _articlesState.update { it.copy(loading = true) }
 
-            _articlesState.emit(ArticlesState(articles = fetchedArticles))
+            delay(2000)
+            val fetchedArticles = useCase.getArticles(forceFetch)
+
+            _articlesState.emit(ArticlesState(articles = fetchedArticles, loading = false))
         }
     }
 }

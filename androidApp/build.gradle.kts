@@ -48,6 +48,7 @@ dependencies {
     implementation(libs.compose.material3)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.navigation.compose)
+    implementation (libs.accompanist.swiperefresh)
 
     implementation(libs.voyager.koin)
     implementation(libs.voyager.transitions)

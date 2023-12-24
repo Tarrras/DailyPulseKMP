@@ -1,5 +1,9 @@
 package com.foxdev.dailypulse.articles
 
+import com.foxdev.dailypulse.articles.data.Article
+import com.foxdev.dailypulse.articles.data.ArticlesRepository
+import com.foxdev.dailypulse.articles.remote.ArticleRaw
+import com.foxdev.dailypulse.articles.remote.ArticlesService
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
@@ -9,11 +13,13 @@ import kotlinx.datetime.todayIn
 import kotlin.math.abs
 
 class ArticlesUseCase(
-    private val service: ArticlesService
+    private val repository: ArticlesRepository
 ) {
 
-    suspend fun getArticles(): List<Article> {
-        val articlesRaw = service.fetchArticles()
+    suspend fun getArticles(
+        forceFetch: Boolean
+    ): List<Article> {
+        val articlesRaw = repository.getArticles(forceFetch)
         return mapArticles(articlesRaw)
     }
 

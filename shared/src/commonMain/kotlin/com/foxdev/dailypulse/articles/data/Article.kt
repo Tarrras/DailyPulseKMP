@@ -1,4 +1,4 @@
-package com.foxdev.dailypulse.articles
+package com.foxdev.dailypulse.articles.data
 
 data class Article(
     val title: String,

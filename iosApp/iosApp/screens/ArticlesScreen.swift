@@ -40,10 +40,6 @@ struct ArticlesScreen: View {
         VStack {
             AppBar()
             
-            if viewModel.articlesState.loading {
-                Loader()
-            }
-            
             if let error = viewModel.articlesState.error {
                 ErrorMessage(message: error)
             }

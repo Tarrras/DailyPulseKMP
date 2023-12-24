@@ -1,4 +1,4 @@
-package com.foxdev.dailypulse.articles
+package com.foxdev.dailypulse.articles.remote
 
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body

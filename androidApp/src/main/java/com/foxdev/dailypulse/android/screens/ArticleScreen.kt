@@ -3,12 +3,10 @@ package com.foxdev.dailypulse.android.screens
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -21,8 +19,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -34,15 +30,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.currentOrThrow
 import coil.compose.AsyncImage
 import com.foxdev.dailypulse.android.Details
 import com.foxdev.dailypulse.android.screens.destinations.AboutScreenDestination
-import com.foxdev.dailypulse.articles.Article
+import com.foxdev.dailypulse.articles.ArticlesState
+import com.foxdev.dailypulse.articles.data.Article
 import com.foxdev.dailypulse.articles.ArticlesViewModel
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.SwipeRefreshState
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import org.koin.androidx.compose.getViewModel
@@ -71,12 +67,31 @@ fun ArticlesScreenContent(
     Column(modifier = Modifier.fillMaxSize()) {
         AppBar(onAboutButtonClick)
 
-        if (articlesState.loading)
-            Loader()
-        if (articlesState.error != null)
-            ErrorMessage(articlesState.error!!)
-        if (articlesState.articles.isNotEmpty())
-            ArticlesListView(articlesViewModel.articlesState.value.articles)
+        ArticlesContentBox(uiState = articlesState) {
+            articlesViewModel.getArticles(true)
+        }
+    }
+}
+
+@Composable
+fun ArticlesContentBox(
+    modifier: Modifier = Modifier,
+    uiState: ArticlesState,
+    onRefresh: () -> Unit
+) {
+    val state = rememberSwipeRefreshState(isRefreshing = uiState.loading)
+
+    SwipeRefresh(
+        state = state,
+        onRefresh = onRefresh,
+        modifier = modifier
+    ) {
+        Box(modifier = Modifier.fillMaxSize()) {
+            if (uiState.error != null)
+                ErrorMessage(uiState.error!!)
+            if (uiState.articles.isNotEmpty())
+                ArticlesListView(uiState.articles)
+        }
     }
 }
 
