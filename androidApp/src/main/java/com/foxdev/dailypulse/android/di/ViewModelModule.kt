@@ -1,6 +1,6 @@
 package com.foxdev.dailypulse.android.di
 
-import com.foxdev.dailypulse.articles.ArticlesViewModel
+import com.foxdev.dailypulse.viewModels.articles.ArticlesViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

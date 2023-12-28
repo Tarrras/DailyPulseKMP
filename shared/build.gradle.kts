@@ -67,6 +67,8 @@ sqldelight {
     databases {
         create(name = "DailyPulseDatabase") {
             packageName.set("foxdev.dailypulse.db")
+            deriveSchemaFromMigrations = false
+            verifyMigrations = true
         }
     }
 }

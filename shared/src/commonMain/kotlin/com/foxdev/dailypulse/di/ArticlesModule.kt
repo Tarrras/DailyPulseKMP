@@ -1,10 +1,10 @@
 package com.foxdev.dailypulse.di
 
-import com.foxdev.dailypulse.articles.remote.ArticlesService
-import com.foxdev.dailypulse.articles.ArticlesUseCase
-import com.foxdev.dailypulse.articles.ArticlesViewModel
-import com.foxdev.dailypulse.articles.data.ArticlesDataSource
-import com.foxdev.dailypulse.articles.data.ArticlesRepository
+import com.foxdev.dailypulse.remote.ArticlesService
+import com.foxdev.dailypulse.data.useCases.ArticlesUseCase
+import com.foxdev.dailypulse.viewModels.articles.ArticlesViewModel
+import com.foxdev.dailypulse.db.dataSources.articles.ArticlesLocalDataSource
+import com.foxdev.dailypulse.data.repository.ArticlesRepository
 import org.koin.dsl.module
 
 val articlesModule = module {
@@ -17,6 +17,6 @@ val articlesModule = module {
     }
 
     single { ArticlesViewModel(get()) }
-    single { ArticlesDataSource(get()) }
+    single { ArticlesLocalDataSource(get()) }
     single { ArticlesRepository(get(), get()) }
 }

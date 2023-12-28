@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS Article;
+CREATE TABLE Article (
+    title TEXT NOT NULL,
+    desc TEXT,
+    date TEXT NOT NULL,
+    imageUrl TEXT,
+    url TEXT NOT NULL,
+    authorId TEXT,
+    authorName TEXT NOT NULL
+);

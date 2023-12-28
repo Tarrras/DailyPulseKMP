@@ -1,4 +1,4 @@
-package com.foxdev.dailypulse.articles.remote
+package com.foxdev.dailypulse.remote.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -10,5 +10,5 @@ data class ArticlesResponse(
     @SerialName("totalResults")
     val results: Int,
     @SerialName("articles")
-    val articles: List<ArticleRaw>
+    val articles: List<ArticleItemResponse>
 )

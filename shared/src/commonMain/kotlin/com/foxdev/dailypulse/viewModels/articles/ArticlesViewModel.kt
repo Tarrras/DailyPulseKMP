@@ -1,21 +1,12 @@
-package com.foxdev.dailypulse.articles
+package com.foxdev.dailypulse.viewModels.articles
 
 import com.foxdev.dailypulse.BaseViewModel
-import io.ktor.client.HttpClient
-import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.serialization.kotlinx.json.json
+import com.foxdev.dailypulse.data.useCases.ArticlesUseCase
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlinx.serialization.json.Json
-import kotlin.time.Duration.Companion.seconds
 
 class ArticlesViewModel(
     private val useCase: ArticlesUseCase

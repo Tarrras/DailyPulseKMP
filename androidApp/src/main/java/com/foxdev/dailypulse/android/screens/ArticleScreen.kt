@@ -33,11 +33,10 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.foxdev.dailypulse.android.Details
 import com.foxdev.dailypulse.android.screens.destinations.AboutScreenDestination
-import com.foxdev.dailypulse.articles.ArticlesState
-import com.foxdev.dailypulse.articles.data.Article
-import com.foxdev.dailypulse.articles.ArticlesViewModel
+import com.foxdev.dailypulse.viewModels.articles.ArticlesState
+import com.foxdev.dailypulse.data.models.ArticleDTO
+import com.foxdev.dailypulse.viewModels.articles.ArticlesViewModel
 import com.google.accompanist.swiperefresh.SwipeRefresh
-import com.google.accompanist.swiperefresh.SwipeRefreshState
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -116,7 +115,7 @@ private fun AppBar(
 }
 
 @Composable
-fun ArticlesListView(articles: List<Article>) {
+fun ArticlesListView(articles: List<ArticleDTO>) {
 
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         items(articles) { article ->
@@ -126,7 +125,7 @@ fun ArticlesListView(articles: List<Article>) {
 }
 
 @Composable
-fun ArticleItemView(article: Article) {
+fun ArticleItemView(article: ArticleDTO) {
 
     Column(
         modifier = Modifier
